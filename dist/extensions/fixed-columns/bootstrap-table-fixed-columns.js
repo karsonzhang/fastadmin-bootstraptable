@@ -1,11 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-};
-
 (function ($) {
     'use strict';
     // Reasonable defaults
@@ -198,8 +192,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     BootstrapTable.prototype.updateSelected = function () {
-        var _this = this;
-
         var that = this;
 
         _updateSelected.apply(this, Array.prototype.slice.apply(arguments));
@@ -210,9 +202,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var $el = $(el);
             var index = $el.data('index');
             var classes = $el.attr('class');
-            var inputSelector = '[name="' + _this.options.selectItemName + '"]';
+            var inputSelector = '[name="' + that.options.selectItemName + '"]';
             var $input = $el.find(inputSelector);
-            if ((typeof index === 'undefined' ? 'undefined' : _typeof(index)) === undefined) {
+            if (typeof index === 'undefined') {
                 return;
             }
 
@@ -223,16 +215,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 if ($input.length) {
                     $tr.find(inputSelector).prop('checked', $input.prop('checked'));
                 }
-                if (_this.$selectAll.length) {
-                    $fixedHeader.add($fixedBody).find('[name="btSelectAll"]').prop('checked', _this.$selectAll.prop('checked'));
+                if (that.$selectAll.length) {
+                    $fixedHeader.add($fixedBody).find('[name="btSelectAll"]').prop('checked', that.$selectAll.prop('checked'));
                 }
             };
-            if (_this.$fixedBody && _this.options.fixedNumber) {
-                updateFixedBody(_this.$fixedHeader, _this.$fixedBody);
+            if (that.$fixedBody && that.options.fixedNumber) {
+                updateFixedBody(that.$fixedHeader, that.$fixedBody);
             }
 
-            if (_this.$fixedBodyRight && _this.options.fixedRightNumber) {
-                updateFixedBody(_this.$fixedHeaderRight, _this.$fixedBodyRight);
+            if (that.$fixedBodyRight && that.options.fixedRightNumber) {
+                updateFixedBody(that.$fixedHeaderRight, that.$fixedBodyRight);
             }
         });
     };
@@ -249,7 +241,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     BootstrapTable.prototype.initFixedColumnsHeader = function () {
-        var _this2 = this;
+        var that = this;
 
         if (this.options.height) {
             this.needFixedColumns = this.$tableHeader.outerWidth(true) < this.$tableHeader.find('table').outerWidth(true);
@@ -259,10 +251,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
         var initFixedHeader = function initFixedHeader($fixedColumns, isRight) {
             $fixedColumns.find('.fixed-table-header').remove();
-            $fixedColumns.append(_this2.$tableHeader.clone(true));
+            $fixedColumns.append(that.$tableHeader.clone(true));
             $fixedColumns.find('.fixed-table-header').css('margin-right', "");
             $fixedColumns.css({
-                width: _this2.getFixedColumnsWidth(isRight)
+                width: that.getFixedColumnsWidth(isRight)
             });
             return $fixedColumns.find('.fixed-table-header');
         };
@@ -286,19 +278,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     BootstrapTable.prototype.initFixedColumnsBody = function () {
-        var _this3 = this;
+        var that = this;
 
         var initFixedBody = function initFixedBody($fixedColumns, $fixedHeader) {
             $fixedColumns.find('.fixed-table-body').remove();
-            $fixedColumns.append(_this3.$tableBody.clone(true));
+            $fixedColumns.append(that.$tableBody.clone(true));
 
             var $fixedBody = $fixedColumns.find('.fixed-table-body');
 
-            var tableBody = _this3.$tableBody.get(0);
+            var tableBody = that.$tableBody.get(0);
             var scrollHeight = tableBody.scrollWidth > tableBody.clientWidth ? getScrollBarWidth() : 0;
             var paginationHeight = $(".fixed-table-pagination").height();
-            if (typeof _this3.options.height !== 'undefined') paginationHeight = 0;
-            var height = _this3.$tableContainer.outerHeight(true) - scrollHeight - paginationHeight + 1;
+            if (typeof that.options.height !== 'undefined') paginationHeight = 0;
+            var height = that.$tableContainer.outerHeight(true) - scrollHeight - paginationHeight + 1;
             $fixedColumns.css({
                 height: height
             });
@@ -342,17 +334,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     BootstrapTable.prototype.initFixedColumnsEvents = function () {
-        var _this4 = this;
+        var that = this;
 
         var toggleHover = function toggleHover(e, toggle) {
             var tr = 'tr[data-index="' + $(e.currentTarget).data('index') + '"]';
-            var $trs = _this4.$tableBody.find(tr);
+            var $trs = that.$tableBody.find(tr);
 
-            if (_this4.$fixedBody) {
-                $trs = $trs.add(_this4.$fixedBody.find(tr));
+            if (that.$fixedBody) {
+                $trs = $trs.add(that.$fixedBody.find(tr));
             }
-            if (_this4.$fixedBodyRight) {
-                $trs = $trs.add(_this4.$fixedBodyRight.find(tr));
+            if (that.$fixedBodyRight) {
+                $trs = $trs.add(that.$fixedBodyRight.find(tr));
             }
 
             $trs.css('background-color', toggle ? $(e.currentTarget).css('background-color') : '');
@@ -367,17 +359,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var updateScroll = function updateScroll(e, fixedBody) {
             var normalized = normalizeWheel(e);
             var deltaY = Math.ceil(normalized.pixelY);
-            var top = _this4.$tableBody.scrollTop() + deltaY;
+            var top = that.$tableBody.scrollTop() + deltaY;
             if (deltaY < 0 && top > 0 || deltaY > 0 && top < fixedBody.scrollHeight - fixedBody.clientHeight) {
                 e.preventDefault();
             }
 
-            _this4.$tableBody.scrollTop(top);
-            if (_this4.$fixedBody) {
-                _this4.$fixedBody.scrollTop(top);
+            that.$tableBody.scrollTop(top);
+            if (that.$fixedBody) {
+                that.$fixedBody.scrollTop(top);
             }
-            if (_this4.$fixedBodyRight) {
-                _this4.$fixedBodyRight.scrollTop(top);
+            if (that.$fixedBodyRight) {
+                that.$fixedBodyRight.scrollTop(top);
             }
         };
         if (this.needFixedColumns && this.options.fixedNumber) {
@@ -388,25 +380,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
             this.$fixedBody[0].addEventListener(mousewheel, function (e) {
                 //给鼠标滑轮绑定事件
-                updateScroll(e, _this4.$fixedBody[0]);
+                updateScroll(e, that.$fixedBody[0]);
             });
         }
         //给原本表格绑定scroll事件
         $('div.fixed-table-body').off('scroll'); //给所有的body解绑 scroll
         this.$tableBody.off('scroll').on('scroll', function (e) {
-            _this4.$tableHeader.scrollLeft(0);
-            if (_this4.$tableBody.scrollLeft() > 0) {
-                _this4.$tableHeader.scrollLeft(_this4.$tableBody.scrollLeft());
-                if (_this4.options.showFooter && !_this4.options.cardView) {
-                    _this4.$tableFooter.scrollLeft(_this4.$tableBody.scrollLeft());
+            that.$tableHeader.scrollLeft(0);
+            if (that.$tableBody.scrollLeft() > 0) {
+                that.$tableHeader.scrollLeft(that.$tableBody.scrollLeft());
+                if (that.options.showFooter && !that.options.cardView) {
+                    that.$tableFooter.scrollLeft(that.$tableBody.scrollLeft());
                 }
             }
-            var top = _this4.$tableBody.scrollTop();
-            if (_this4.$fixedBody) {
-                _this4.$fixedBody.scrollTop(top);
+            var top = that.$tableBody.scrollTop();
+            if (that.$fixedBody) {
+                that.$fixedBody.scrollTop(top);
             }
-            if (_this4.$fixedBodyRight) {
-                _this4.$fixedBodyRight.scrollTop(top);
+            if (that.$fixedBodyRight) {
+                that.$fixedBodyRight.scrollTop(top);
             }
         });
 
@@ -418,13 +410,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
             this.$fixedBodyRight[0].addEventListener(mousewheel, function (e) {
                 //给鼠标滑轮绑定事件
-                updateScroll(e, _this4.$fixedBodyRight[0]);
+                updateScroll(e, that.$fixedBodyRight[0]);
             });
             //给固定表格的checkbox绑定事件
             this.$fixedBody && this.$fixedBody.find('input[name="' + this.options.selectItemName + '"]').off("click").on('click', function (e) {
                 e.stopImmediatePropagation();
                 var index = $(e.target).data("index");
-                $(_this4.$selectItem[index]).trigger("click");
+                $(that.$selectItem[index]).trigger("click");
             });
         }
 
@@ -433,7 +425,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 var $target = $(e.target);
                 var value = $target.val();
                 var field = $target.parents('th').data('field');
-                var $coreTh = _this4.$header.find('th[data-field="' + field + '"]');
+                var $coreTh = that.$header.find('th[data-field="' + field + '"]');
 
                 if ($target.is('input')) {
                     $coreTh.find('input').val(value);
@@ -443,7 +435,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     $select.find('option[value="' + value + '"]').attr('selected', true);
                 }
 
-                _this4.triggerSearch();
+                that.triggerSearch();
             });
         }
     };
