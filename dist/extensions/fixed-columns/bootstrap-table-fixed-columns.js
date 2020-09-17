@@ -169,22 +169,25 @@
                 this.$tableBody.css("height", "100%");
                 this.$fixedColumns && this.$fixedColumns.show();
                 this.$fixedColumnsRight && this.$fixedColumnsRight.show();
-                this.$fixedHeaderRight.scrollLeft(this.$tableBody.find('table').width());
-                this.$fixedBodyRight.scrollLeft(this.$tableBody.find('table').width());
+                this.$fixedHeaderRight && this.$fixedHeaderRight.scrollLeft(this.$tableBody.find('table').width());
+                this.$fixedBodyRight && this.$fixedBodyRight.scrollLeft(this.$tableBody.find('table').width());
             }
         }
         if (!that.fixedColumnsSupported()) {
             return;
         }
         if (arguments[0] === 'post-header') {
+            if (!this.$fixedColumns && !this.$fixedColumnsRight) {
+                this.initFixedContainer();
+            }
             this.initFixedColumnsHeader();
         } else if (arguments[0] === 'scroll-body') {
             if (this.needFixedColumns && this.options.fixedNumber) {
-                this.$fixedBody.scrollTop(this.$tableBody.scrollTop());
+                this.$fixedBody && this.$fixedBody.scrollTop(this.$tableBody.scrollTop());
             }
 
             if (this.needFixedColumns && this.options.fixedRightNumber) {
-                this.$fixedBodyRight.scrollTop(this.$tableBody.scrollTop());
+                this.$fixedBodyRight && this.$fixedBodyRight.scrollTop(this.$tableBody.scrollTop());
             }
         } else if (arguments[0] === 'load-success') {
             this.hideLoading();
