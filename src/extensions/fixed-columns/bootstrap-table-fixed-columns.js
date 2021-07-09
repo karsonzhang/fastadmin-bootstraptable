@@ -177,9 +177,6 @@
             return;
         }
         if (arguments[0] === 'post-header') {
-            if (!this.$fixedColumns && !this.$fixedColumnsRight) {
-                this.initFixedContainer();
-            }
             this.initFixedColumnsHeader();
         } else if (arguments[0] === 'scroll-body') {
             if (this.needFixedColumns && this.options.fixedNumber) {
@@ -385,6 +382,17 @@
                 //给鼠标滑轮绑定事件
                 updateScroll(e, that.$fixedBody[0]);
             });
+            //给固定表格的checkbox绑定事件
+            this.$fixedBody.find('input[name="' + this.options.selectItemName + '"]').off("click").on('click', function (e) {
+                e.stopImmediatePropagation();
+                var index = $(e.target).data("index");
+                $(that.$selectItem[index]).trigger("click");
+            });
+            //绑定TD点击事件
+            this.$fixedBody.find('> table > tbody > tr[data-index] > td').off('click dblclick').on('click dblclick', function (e) {
+                var index = $(this).closest("tr[data-index]").data("index");
+                $(that.$selectItem[index]).closest("tr[data-index]").find(">td:eq(" + $(this).index() + ")").trigger("click");
+            });
         }
         //给原本表格绑定scroll事件
         $('div.fixed-table-body').off('scroll'); //给所有的body解绑 scroll
@@ -416,10 +424,15 @@
                 updateScroll(e, that.$fixedBodyRight[0]);
             });
             //给固定表格的checkbox绑定事件
-            this.$fixedBody && this.$fixedBody.find('input[name="' + this.options.selectItemName + '"]').off("click").on('click', function (e) {
+            this.$fixedBodyRight.find('input[name="' + this.options.selectItemName + '"]').off("click").on('click', function (e) {
                 e.stopImmediatePropagation();
                 var index = $(e.target).data("index");
                 $(that.$selectItem[index]).trigger("click");
+            });
+            //绑定TD点击事件
+            this.$fixedBodyRight.find('> table > tbody > tr[data-index] > td').off('click dblclick').on('click dblclick', function (e) {
+                var index = $(this).closest("tr[data-index]").data("index");
+                $(that.$selectItem[index]).closest("tr[data-index]").find(">td:eq(" + $(this).index() + ")").trigger("click");
             });
         }
 
