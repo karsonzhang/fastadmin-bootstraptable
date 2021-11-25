@@ -292,11 +292,13 @@
             if (typeof that.options.height !== 'undefined') paginationHeight = 0;
             var height = that.$tableContainer.outerHeight(true) - scrollHeight - paginationHeight + 1;
             $fixedColumns.css({
-                height: height
+                height: height,
+                "min-height": "calc(100% - " + (paginationHeight + scrollHeight) + "px)"
             });
-
             $fixedBody.css({
-                height: height - $fixedHeader.height()
+                height: height - $fixedHeader.height(),
+                "min-height": "calc(100% - " + $fixedHeader.height() + "px)",
+                overflow: "hidden"
             });
 
             return $fixedBody;
