@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.11.2
+ * version: 1.11.8
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
@@ -1214,7 +1214,7 @@
             $(event.currentTarget).val(text);
         }
 
-        if (text === this.searchText) {
+        if (text === this.searchText || (text === '' && typeof this.searchText === 'undefined')) {
             return;
         }
         this.searchText = text;

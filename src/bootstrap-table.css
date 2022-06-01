@@ -310,4 +310,7 @@ div.fixed-table-scroll-outer {
     content: "";
     display: block;
     clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
 }
