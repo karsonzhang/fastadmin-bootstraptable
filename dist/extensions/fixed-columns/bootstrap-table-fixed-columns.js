@@ -288,7 +288,7 @@
 
             var tableBody = that.$tableBody.get(0);
             var scrollHeight = tableBody.scrollWidth > tableBody.clientWidth ? getScrollBarWidth() : 0;
-            var paginationHeight = $(".fixed-table-pagination").height();
+            var paginationHeight = $(".fixed-table-pagination", that.$tableContainer).height();
             if (typeof that.options.height !== 'undefined') paginationHeight = 0;
             var height = that.$tableContainer.outerHeight(true) - scrollHeight - paginationHeight + 1;
             $fixedColumns.css({
