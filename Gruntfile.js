@@ -7,23 +7,23 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         // Metadata.
-        pkg: grunt.file.readJSON('bootstrap-table.jquery.json'),
+        pkg: grunt.file.readJSON('package.json'),
         banner: '/*\n' +
-                '* <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                '<%= pkg.homepage ? "* " + pkg.homepage : "" %>\n' +
-                '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-                '* Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n' +
+                '* bootstrap-table - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                'https://github.com/wenzhixin/bootstrap-table\n' +
+                '* Copyright (c) 2017 zhixin wen\n' +
+                '* Licensed MIT License\n' +
                 '*/\n',
         // Task configuration.
         clean: ['dist', 'docs/dist'],
         concat: {
             //basic_target: {
-            //    src: ['src/<%= pkg.name %>.js', 'src/extensions/**/*.js'],
-            //    dest: 'dist/<%= pkg.name %>-all.js'
+            //    src: ['src/bootstrap-table.js', 'src/extensions/**/*.js'],
+            //    dest: 'dist/bootstrap-table-all.js'
             //},
             locale_target: {
                 src: ['src/locale/**/*.js'],
-                dest: 'dist/<%= pkg.name %>-locale-all.js'
+                dest: 'dist/bootstrap-table-locale-all.js'
             }
         },
         uglify: {
@@ -32,9 +32,9 @@ module.exports = function(grunt) {
             },
             basic_target: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['src/<%=pkg.name %>.js'],
-                    //'dist/<%= pkg.name %>-all.min.js': ['dist/<%=pkg.name %>-all.js'],
-                    'dist/<%= pkg.name %>-locale-all.min.js': ['dist/<%=pkg.name %>-locale-all.js']
+                    'dist/bootstrap-table.min.js': ['src/bootstrap-table.js'],
+                    //'dist/bootstrap-table-all.min.js': ['dist/bootstrap-table-all.js'],
+                    'dist/bootstrap-table-locale-all.min.js': ['dist/bootstrap-table-locale-all.js']
                 }
             },
             locale_target: {
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    'dist/<%= pkg.name %>.min.css': ['src/<%=pkg.name %>.css']
+                    'dist/bootstrap-table.min.css': ['src/bootstrap-table.css']
                 }
             }
         },
@@ -78,12 +78,6 @@ module.exports = function(grunt) {
                 src: '**/*',            // copy all files and subfolders
                 dest: 'docs/dist',      // destination folder
                 expand: true            // required when using cwd
-            }
-        },
-        release: {
-            options: {
-                additionalFiles: ['bootstrap-table.jquery.json'],
-                beforeRelease: ['docs', 'default']
             }
         }
     });
@@ -126,7 +120,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-release');
 
     grunt.registerTask('default', ['clean', 'concat', 'uglify', 'cssmin', 'copy']);
 };

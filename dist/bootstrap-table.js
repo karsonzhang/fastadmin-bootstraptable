@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.11.8
+ * version: 1.11.9
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
@@ -453,7 +453,7 @@
             return false;
         },
         onRefresh: function (params) {
-            return false;
+          return false;
         },
         onResetView: function () {
             return false;
@@ -881,10 +881,10 @@
 
         this.$selectAll = this.$header.find('[name="btSelectAll"]');
         this.$selectAll.off('click').on('click', function () {
-            var checked = $(this).prop('checked');
-            that[checked ? 'checkAll' : 'uncheckAll']();
-            that.updateSelected();
-        });
+                var checked = $(this).prop('checked');
+                that[checked ? 'checkAll' : 'uncheckAll']();
+                that.updateSelected();
+            });
     };
 
     BootstrapTable.prototype.initFooter = function () {
@@ -1064,37 +1064,37 @@
 
         if (this.options.showPaginationSwitch) {
             html.push(sprintf('<button class="btn' +
-                sprintf(' btn-%s', this.options.buttonsClass) +
-                sprintf(' btn-%s', this.options.iconSize) +
-                '" type="button" name="paginationSwitch" aria-label="pagination Switch" title="%s">',
-                this.options.formatPaginationSwitch()),
+                    sprintf(' btn-%s', this.options.buttonsClass) +
+                    sprintf(' btn-%s', this.options.iconSize) +
+                    '" type="button" name="paginationSwitch" aria-label="pagination Switch" title="%s">',
+                    this.options.formatPaginationSwitch()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.paginationSwitchDown),
                 '</button>');
         }
 
         if (this.options.showRefresh) {
             html.push(sprintf('<button class="btn' +
-                sprintf(' btn-%s', this.options.buttonsClass) +
-                sprintf(' btn-%s', this.options.iconSize) +
-                '" type="button" name="refresh" aria-label="refresh" title="%s">',
-                this.options.formatRefresh()),
+                    sprintf(' btn-%s', this.options.buttonsClass) +
+                    sprintf(' btn-%s', this.options.iconSize) +
+                    '" type="button" name="refresh" aria-label="refresh" title="%s">',
+                    this.options.formatRefresh()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh),
                 '</button>');
         }
 
         if (this.options.showToggle) {
             html.push(sprintf('<button class="btn' +
-                sprintf(' btn-%s', this.options.buttonsClass) +
-                sprintf(' btn-%s', this.options.iconSize) +
-                '" type="button" name="toggle" aria-label="toggle" title="%s">',
-                this.options.formatToggle()),
+                    sprintf(' btn-%s', this.options.buttonsClass) +
+                    sprintf(' btn-%s', this.options.iconSize) +
+                    '" type="button" name="toggle" aria-label="toggle" title="%s">',
+                    this.options.formatToggle()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle),
                 '</button>');
         }
 
         if (this.options.showColumns) {
             html.push(sprintf('<div class="keep-open btn-group" title="%s">',
-                this.options.formatColumns()),
+                    this.options.formatColumns()),
                 '<button type="button" aria-label="columns" class="btn' +
                 sprintf(' btn-%s', this.options.buttonsClass) +
                 sprintf(' btn-%s', this.options.iconSize) +
@@ -1146,8 +1146,8 @@
         if (this.options.showToggle) {
             this.$toolbar.find('button[name="toggle"]')
                 .off('click').on('click', function () {
-                that.toggleView();
-            });
+                    that.toggleView();
+                });
         }
 
         if (this.options.showColumns) {
@@ -1243,7 +1243,7 @@
             this.data = f ? $.grep(this.options.data, function (item, i) {
                 for (var key in f) {
                     if ($.isArray(f[key]) && $.inArray(item[key], f[key]) === -1 ||
-                        !$.isArray(f[key]) && item[key] !== f[key]) {
+                            !$.isArray(f[key]) && item[key] !== f[key]) {
                         return false;
                     }
                 }
@@ -1351,27 +1351,27 @@
             '<div class="pull-' + this.options.paginationDetailHAlign + ' pagination-detail">',
             '<span class="pagination-info">',
             this.options.onlyInfoPagination ? this.options.formatDetailPagination(this.options.totalRows) :
-                this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
+            this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
             '</span>');
 
         if (!this.options.onlyInfoPagination) {
             html.push('<span class="page-list">');
 
             var pageNumber = [
-                sprintf('<span class="btn-group %s">',
-                    this.options.paginationVAlign === 'top' || this.options.paginationVAlign === 'both' ?
-                        'dropdown' : 'dropup'),
-                '<button type="button" class="btn' +
-                sprintf(' btn-%s', this.options.buttonsClass) +
-                sprintf(' btn-%s', this.options.iconSize) +
-                ' dropdown-toggle" data-toggle="dropdown">',
-                '<span class="page-size">',
-                $allSelected ? this.options.formatAllRows() : this.options.pageSize,
-                '</span>',
-                ' <span class="caret"></span>',
-                '</button>',
-                '<ul class="dropdown-menu" role="menu">'
-            ];
+                    sprintf('<span class="btn-group %s">',
+                        this.options.paginationVAlign === 'top' || this.options.paginationVAlign === 'both' ?
+                            'dropdown' : 'dropup'),
+                    '<button type="button" class="btn' +
+                    sprintf(' btn-%s', this.options.buttonsClass) +
+                    sprintf(' btn-%s', this.options.iconSize) +
+                    ' dropdown-toggle" data-toggle="dropdown">',
+                    '<span class="page-size">',
+                    $allSelected ? this.options.formatAllRows() : this.options.pageSize,
+                    '</span>',
+                    ' <span class="caret"></span>',
+                    '</button>',
+                    '<ul class="dropdown-menu" role="menu">'
+                ];
 
             if (typeof this.options.pageList === 'string') {
                 var list = this.options.pageList.replace('[', '').replace(']', '')
@@ -1744,16 +1744,16 @@
                 type = column.radio ? 'radio' : type;
 
                 text = [sprintf(that.options.cardView ?
-                    '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
+                        '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
                     '<input' +
                     sprintf(' data-index="%s"', i) +
                     sprintf(' name="%s"', that.options.selectItemName) +
                     sprintf(' type="%s"', type) +
                     sprintf(' value="%s"', item[that.options.idField]) +
                     sprintf(' checked="%s"', value === true ||
-                    (value_ || value && value.checked) ? 'checked' : undefined) +
+                        (value_ || value && value.checked) ? 'checked' : undefined) +
                     sprintf(' disabled="%s"', !column.checkboxEnabled ||
-                    (value && value.disabled) ? 'disabled' : undefined) +
+                        (value && value.disabled) ? 'disabled' : undefined) +
                     ' />',
                     that.header.formatters[j] && typeof value === 'string' ? value : '',
                     that.options.cardView ? '</div>' : '</td>'
@@ -1770,7 +1770,7 @@
                     sprintf('<span class="value">%s</span>', value),
                     '</div>'
                 ].join('') : [sprintf('<td%s %s %s %s %s %s %s>',
-                    id_, class_, style, data_, rowspan_, colspan_, title_),
+                        id_, class_, style, data_, rowspan_, colspan_, title_),
                     value,
                     '</td>'
                 ].join('');
@@ -1828,8 +1828,8 @@
         if (!hasTr) {
             trFragments.append('<tr class="no-records-found">' +
                 sprintf('<td colspan="%s">%s</td>',
-                    this.$header.find('th').length,
-                    this.options.formatNoMatches()) +
+                this.$header.find('th').length,
+                this.options.formatNoMatches()) +
                 '</tr>');
         }
 

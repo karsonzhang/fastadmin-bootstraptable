@@ -93,10 +93,16 @@
                 $menu.find('li').click(function () {
                     var type = $(this).data('type'),
                         doExport = function () {
-                            that.$el.tableExport($.extend({}, that.options.exportOptions, {
-                                type: type,
-                                escape: false
-                            }));
+                            if (typeof require === 'function') {
+                                require(['tableexport'], function () {
+                                    that.$el.tableExport($.extend({}, that.options.exportOptions, {
+                                        type: type,
+                                        escape: false
+                                    }));
+                                });
+                            } else {
+                                throw new Error("RequireJS not found");
+                            }
                         };
 
                     if (that.options.exportDataType === 'all' && that.options.pagination) {

@@ -120,12 +120,12 @@
         }
 
         if (this.options.fixedNumber) {
-            this.$tableContainer.find('.fixed-columns').size() == 0 && this.$tableContainer.append('<div class="fixed-columns"></div>');
+            this.$tableContainer.find('.fixed-columns').length == 0 && this.$tableContainer.append('<div class="fixed-columns"></div>');
             this.$fixedColumns = this.$tableContainer.find('.fixed-columns');
         }
 
         if (this.options.fixedRightNumber) {
-            this.$tableContainer.find('.fixed-columns-right').size() == 0 && this.$tableContainer.append('<div class="fixed-columns-right"></div>');
+            this.$tableContainer.find('.fixed-columns-right').length == 0 && this.$tableContainer.append('<div class="fixed-columns-right"></div>');
             this.$fixedColumnsRight = this.$tableContainer.find('.fixed-columns-right');
         }
     };

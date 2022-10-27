@@ -1,18 +1,17 @@
 {
   "name": "fastadmin-bootstraptable",
   "description": "An extended Bootstrap table with radio, checkbox, sort, pagination, and other added features. (supports twitter bootstrap v2 and v3).",
-  "version": "1.11.8",
+  "version": "1.11.9",
   "main": "./dist/bootstrap-table.js",
   "devDependencies": {
     "cz-conventional-changelog": "^1.1.5",
-    "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.6.0",
+    "grunt": "^1.5.3",
+    "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-cssmin": "^0.12.2",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.8.0",
-    "grunt-release": "^0.13.0"
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-jshint": "^3.2.0",
+    "grunt-contrib-uglify": "^5.2.2"
   },
   "repository": {
     "type": "git",
