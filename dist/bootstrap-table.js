@@ -1937,7 +1937,7 @@
             for (var key in events) {
                 that.$body.find('>tr:not(.no-records-found)').each(function () {
                     var $tr = $(this),
-                        $td = $tr.find(that.options.cardView ? '.card-view' : 'td').eq(fieldIndex),
+                        $td = $tr.find(that.options.cardView ? '.card-view' : '>td').eq(fieldIndex),
                         index = key.indexOf(' '),
                         name = key.substring(0, index),
                         el = key.substring(index + 1),
