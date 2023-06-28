@@ -115,10 +115,6 @@
         return that.options.fixedColumns && !that.options.detailView && !that.options.cardView;
     };
     BootstrapTable.prototype.initFixedContainer = function () {
-        if (!this.fixedColumnsSupported()) {
-            return;
-        }
-
         if (this.options.fixedNumber) {
             this.$tableContainer.find('.fixed-columns').length == 0 && this.$tableContainer.append('<div class="fixed-columns"></div>');
             this.$fixedColumns = this.$tableContainer.find('.fixed-columns');
