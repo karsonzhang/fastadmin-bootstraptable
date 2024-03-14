@@ -15,6 +15,9 @@
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
             return '顯示第 ' + pageFrom + ' 到第 ' + pageTo + ' 項記錄，總共 ' + totalRows + ' 項記錄';
         },
+        formatDetailPagination: function (pageFrom, pageTo, totalRows) {
+            return '總共 ' + totalRows + ' 項記錄';
+        },
         formatSearch: function () {
             return '搜尋';
         },
