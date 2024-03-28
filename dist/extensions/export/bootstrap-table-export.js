@@ -91,46 +91,46 @@
                 });
 
                 $menu.find('li').click(function () {
-                    var type = $(this).data('type'),
-                        doExport = function () {
-                            if (typeof require === 'function') {
-                                require(['tableexport'], function () {
-                                    that.$el.tableExport($.extend({}, that.options.exportOptions, {
-                                        type: type,
-                                        escape: false
-                                    }));
-                                });
-                            } else {
-                                throw new Error("RequireJS not found");
-                            }
-                        };
-
-                    if (that.options.exportDataType === 'all' && that.options.pagination) {
-                        that.$el.one(that.options.sidePagination === 'server' ? 'post-body.bs.table' : 'page-change.bs.table', function () {
-                            doExport();
-                            that.togglePagination();
-                        });
-                        that.togglePagination();
-                    } else if (that.options.exportDataType === 'selected') {
-                        var data = that.getData(),
-                            selectedData = that.getAllSelections();
-
-                        // Quick fix #2220
-                        if (that.options.sidePagination === 'server') {
-                            data = {total: that.options.totalRows};
-                            data[that.options.dataField] = that.getData();
-
-                            var Table = typeof require === 'function' ? require('table') : null;
-                            selectedData = {total: that.options.totalRows};
-                            selectedData[that.options.dataField] = Table && that.options.maintainSelected ? Table.api.selecteddata(that.$el) : that.getAllSelections();
-                        }
-
-                        that.load(selectedData);
-                        doExport();
-                        that.load(data);
-                    } else {
-                        doExport();
+                    var li = this;
+                    if (typeof require !== 'function') {
+                        throw new Error("RequireJS not found");
                     }
+                    require(['tableexport'], function () {
+                        var type = $(li).data('type'),
+                            doExport = function () {
+                                that.$el.tableExport($.extend({}, that.options.exportOptions, {
+                                    type: type,
+                                    escape: false
+                                }));
+                            };
+
+                        if (that.options.exportDataType === 'all' && that.options.pagination) {
+                            that.$el.one(that.options.sidePagination === 'server' ? 'post-body.bs.table' : 'page-change.bs.table', function () {
+                                doExport();
+                                that.togglePagination();
+                            });
+                            that.togglePagination();
+                        } else if (that.options.exportDataType === 'selected') {
+                            var data = that.getData(),
+                                selectedData = that.getAllSelections();
+
+                            // Quick fix #2220
+                            if (that.options.sidePagination === 'server') {
+                                data = {total: that.options.totalRows};
+                                data[that.options.dataField] = that.getData();
+
+                                var Table = typeof require === 'function' ? require('table') : null;
+                                selectedData = {total: that.options.totalRows};
+                                selectedData[that.options.dataField] = Table && that.options.maintainSelected ? Table.api.selecteddata(that.$el) : that.getAllSelections();
+                            }
+
+                            that.load(selectedData);
+                            doExport();
+                            that.load(data);
+                        } else {
+                            doExport();
+                        }
+                    });
                 });
             }
         }
